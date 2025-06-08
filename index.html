@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofoliu PR NIVEA PureGlow</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #003e92;
+      --accent-color: #f0c14b;
+      --accent-hover: #ddb845;
+      --bg-light: #f9f9f9;
+      --bg-white: #fff;
+      --text-color: #333;
+      --section-gap: 4rem;
+      --header-height: 70px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-color);
+      background: var(--bg-light);
+      line-height: 1.6;
+      padding-top: var(--header-height);
+    }
+    img { display: block; max-width: 100%; }
+
+    /* Header & Nav */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+      background: rgba(0, 62, 146, 0.95);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+    }
+    .navbar {
+      max-width: 1200px; margin: auto;
+      display: flex; justify-content: space-between; align-items: center;
+      height: 100%; padding: 0 2rem;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      color: #fff; font-size: 1.75rem;
+      letter-spacing: 1px;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a {
+      color: #fff; text-decoration: none;
+      font-weight: 600; transition: color .3s;
+    }
+    nav a:hover { color: var(--accent-color); }
+
+    /* Section Base */
+    section {
+      position: relative;
+      padding: calc(var(--section-gap) + var(--header-height)) 2rem var(--section-gap) 2rem;
+      width: 100%;
+    }
+    .container { max-width: 1200px; margin: auto; }
+    h2 { margin-bottom: 1.5rem; }
+
+    /* Hero Section */
+    .hero {
+      height: calc(100vh - var(--header-height));
+      background: url('images/1.jpg') center/cover no-repeat;
+      position: relative; display: flex;
+      justify-content: center; align-items: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero::before {
+      content: ""; position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.35);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 800px; color: #fff;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+      margin-bottom: 1rem;
+    }
+    .hero p.subtitle {
+      font-size: 1.25rem; margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-block; background: var(--accent-color);
+      color: #fff; padding: .75rem 1.75rem;
+      border: none; border-radius: 40px;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      font-weight: 700; cursor: pointer;
+      transition: background .3s, transform .3s, box-shadow .3s;
+    }
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Background Alternation */
+    #intro { background: var(--bg-white); }
+    #features { background: var(--bg-light); }
+    #gallery { background: var(--bg-white); }
+    #testimonials { background: var(--bg-light); }
+    #cta { background: var(--bg-white); }
+
+    /* Features Cards & Modals */
+    .features { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; }
+    .feature-card {
+      flex: 1 1 calc(25% - 2rem);
+      background: var(--bg-white); padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform .4s, box-shadow .4s;
+      cursor: pointer;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.2);
+    }
+    .feature-icon {
+      font-size: 3.5rem; color: var(--primary-color);
+      margin-bottom: 1rem; transition: transform .4s;
+    }
+    .feature-card:hover .feature-icon { transform: scale(1.25); }
+    .feature-card h3 { margin-bottom: .75rem; font-weight: 700; }
+    .feature-card p { font-size: .95rem; color: #555; }
+
+    /* Modal Styles */
+    .modal {
+      display: none; position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      align-items: center; justify-content: center;
+      z-index: 2000;
+    }
+    .modal-content {
+      background: var(--bg-white); padding: 2rem;
+      border-radius: 8px; max-width: 800px;
+      max-height: 90vh; overflow-y: auto;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 1.5rem; cursor: pointer; color: #999;
+    }
+    .modal-content h2 { margin-bottom: 1rem; font-family: 'Playfair Display', serif; color: var(--primary-color); }
+    .modal-content p, .modal-content li { margin-bottom: 0.75rem; line-height: 1.4; }
+
+    /* Gallery Masonry */
+    .gallery { column-count: 3; column-gap: 1rem; }
+    .gallery img {
+      width: 100%; margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      transition: transform .3s, box-shadow .3s;
+      break-inside: avoid;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    /* Testimonials */
+    .testimonials { display: flex; flex-direction: column; gap: 2rem; }
+    .testimonial-card {
+      background: var(--bg-white); padding: 2rem;
+      border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: relative; overflow: hidden;
+    }
+    .testimonial-card::before {
+      content: "\f10d";
+      font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      position: absolute; top: -10px; left: -10px;
+      font-size: 5rem; color: rgba(0,62,146,0.05);
+    }
+    .testimonial-content { margin-bottom: 1rem; font-style: italic; }
+    .testimonial-author { font-weight: 600; text-align: right; color: var(--primary-color); }
+
+    /* CTA */
+    .cta-content { text-align: center; }
+    .cta-content h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .cta-content p { margin-bottom: 1.5rem; font-size: 1.1rem; }
+    .newsletter {
+      display: inline-flex; border-radius: 50px; overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .newsletter input {
+      padding: .75rem 1rem; border: none; outline: none;
+      font-size: 1rem; min-width: 250px;
+    }
+    .newsletter button {
+      background: var(--primary-color); border: none;
+      color: #fff; padding: .75rem 1.5rem;
+      cursor: pointer; font-weight: 600;
+      transition: background .3s;
+    }
+    .newsletter button:hover { background: var(--accent-color); }
+
+    /* Footer */
+    footer {
+      background: var(--primary-color);
+      color: #fff; text-align: center;
+      padding: 2rem 1rem; margin-top: 2rem;
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar container">
+      <div class="logo">NIVEA <span style="font-weight:400">PureGlow</span></div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#intro">Introducere</a></li>
+          <li><a href="#features">Instrumente</a></li>
+          <li><a href="#gallery">Galerie</a></li>
+          <li><a href="#testimonials">Testimoniale</a></li>
+          <li><a href="#cta">Înscriere</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1>Portofoliu PR NIVEA PureGlow</h1>
+      <p class="subtitle">Lansare gama PureGlow pentru îngrijirea pielii sensibile</p>
+      <a href="#intro" class="btn">Descoperă</a>
+    </div>
+  </section>
+
+  <section id="intro">
+    <div class="container">
+      <h2>INTRODUCERE</h2>
+      <p>Acest portofoliu a fost realizat în cadrul disciplinei <strong>Tehnici de redactare în PR</strong> și reunește patru instrumente esențiale de comunicare scrisă utilizate în relația dintre un brand și publicul său: comunicatul de presă, advertorialul, invitația de presă și email pitching.</p>
+      <p>Brandul ales este <strong>NIVEA</strong>, iar tema centrală este lansarea gamei <strong>PureGlow</strong>, o colecție de produse dermatocosmetice dedicate îngrijirii pielii sensibile.</p>
+      <p>Portofoliul extins include două comunicate de presă (cu unghiuri diferite), două emailuri pitching (adaptate pe tonuri distincte), un advertorial narativ, o invitație de presă creativă, o fișă de presă tehnică și elemente vizuale menite să susțină componenta practicării comunicării.</p>
+      <p>Scopul acestui proiect este de a demonstra nu doar stăpânirea tehnicilor de redactare PR, ci și capacitatea de a construi un mesaj coerent, original și relevant pentru o campanie reală de produs.</p>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container features">
+      <div class="feature-card" data-target="comm">
+        <i class="fa-solid fa-newspaper feature-icon"></i>
+        <h3>Comunicat de presă</h3>
+        <p>Află detaliile oficiale ale lansării.</p>
+      </div>
+      <div class="feature-card" data-target="advert">
+        <i class="fa-solid fa-pen-nib feature-icon"></i>
+        <h3>Advertorial</h3>
+        <p>Povestea editorială completă.</p>
+      </div>
+      <div class="feature-card" data-target="email">
+        <i class="fa-solid fa-envelope-open-text feature-icon"></i>
+        <h3>Email Pitching</h3>
+        <p>Model de email pentru redacții medicale.</p>
+      </div>
+      <div class="feature-card" data-target="invite">
+        <i class="fa-solid fa-calendar-plus feature-icon"></i>
+        <h3>Invitație de presă</h3>
+        <p>Vizual și detalii eveniment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modals -->
+  <div id="modal-comm" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2>COMUNICAT DE PRESĂ 1</h2>
+      <p><strong>Lansarea gamei NIVEA PureGlow – un nou standard pentru îngrijirea pielii sensibile</strong></p>
+      <p><em>📍 București, 10 iunie 2025</em></p>
+      <p>NIVEA România anunță lansarea oficială a gamei PureGlow, o colecție inovatoare de produse create special pentru tenul sensibil – fără parfum, fără alcool, fără compromisuri.</p>
+      <p>Noua linie este alcătuită din 3 produse esențiale: cremă hidratantă de zi, apă micelară ultra-delicată și un serum calmant cu provitamina B5 și extract de ovăz. Gama a fost testată dermatologic și se adresează femeilor care își doresc o rutină minimalistă, dar eficientă.</p>
+      <p>„PureGlow este mai mult decât o gamă. Este un gest de încredere pe care ni-l oferim zilnic. Am creat-o pornind de la nevoile reale ale consumatoarelor cu piele sensibilă, dar și de la valorile care definesc NIVEA: accesibilitate, siguranță și empatie.”</p>
+      <p><strong>— Andreea Ilie, PR Manager, NIVEA România</strong></p>
+      <p>Evenimentul de lansare va avea loc marți, 25 iunie, la Casa Monteoru, într-un cadru relaxat, cu Beauty Bar interactiv, testare live de produse, muzică ambientală și sesiuni de consultanță personalizată.</p>
+      <p>👗 Dress code: Smart casual cu accent de albastru (💙)</p>
+    </div>
+  </div>
+
+  <div id="modal-advert" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2>ADVERTORIAL EXTINS</h2>
+      <p><em>„Piele sensibilă. Fără rușine. Cu încredere.”</em><br>de Ioana Nicoară, pentru Glow Magazine</p>
+      <hr>
+      <p>Am crescut cu NIVEA în dulapul de baie. Era acolo, alături de dischetele demachiante, de mama grăbită dimineața și de mine, furând din cremă ca să mă simt „mare”. Ani mai târziu, pielea mea a devenit… selectivă. Întâi roșeață, apoi uscăciune, și în cele din urmă: eticheta. „Ten sensibil.”</p>
+      <p>Dar știi ce nu mi-a spus nimeni? Că nu trebuie să-ți fie rușine cu pielea ta. Că nu ești „prea sensibilă”, ci doar ai nevoie de ceva care să te asculte. Așa am descoperit NIVEA PureGlow – o gamă creată special pentru pielea care reacționează la tot: la schimbări de vreme, stres, sau uneori, la lume.</p>
+      <hr>
+      <ul>
+        <li>💧 <strong>O rutină simplă, dar exact ce trebuie</strong></li>
+        <li>🧴 Cremă hidratantă de zi – calmantă, lejeră, fără parfum, se absoarbe repede și nu lasă peliculă.</li>
+        <li>💦 Apă micelară ultra-delicată – îndepărtează machiajul și impuritățile fără să irite.</li>
+        <li>🌾 Serum cu provitamina B5 și extract de ovăz – textura lui e ca un „îmbrățișare cu grijă”, fără senzație de film gras.</li>
+      </ul>
+      <hr>
+      <p>📈 Rezultate reale, nu doar în reclame: După 7 zile, pielea mea era calmă, uniformă, fără pete roșii. „Pari mai odihnită,” mi-au spus prietenii.</p>
+      <hr>
+      <p>💬 Pur și simplu, îngrijire care îți înțelege ritmul: fără ambalaje sofisticate, doar respect pentru pielea ta.</p>
+      <p>🛍️ Găsești gama completă în magazine și online pe nivea.ro<br>💙 Primele 100 de comenzi – livrare gratuită + mini-ghid de îngrijire calmantă.<br>📲 Urmărește #PureGlowByNIVEA pentru review-uri pe Instagram, TikTok și YouTube.</p>
+    </div>
+  </div>
+
+  <div id="modal-email" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2>EMAIL PITCHING – VARIANTA MEDICALĂ</h2>
+      <p><strong>De la:</strong> andreea.ilie@nivea.ro<br><strong>Către:</strong> redactia@csid.ro<br><strong>Subiect:</strong> NIVEA lansează PureGlow – o gamă fără parfum, alcool sau iritanți</p>
+      <hr>
+      <p>Stimată redacție,</p>
+      <p>Mă numesc <strong>Andreea Ilie</strong> și sunt PR Manager în cadrul NIVEA România. Pe 25 iunie vom lansa gama <strong>PureGlow</strong>, dedicată persoanelor cu ten sensibil.</p>
+      <p>Gama include cremă hidratantă, apă micelară și serum calmant formulate fără iritanți și validate clinic:</p>
+      <ul>
+        <li>97% reduse senzațiile neplăcute în 7 zile</li>
+        <li>89% îmbunătățire a texturii pielii</li>
+        <li>100% toleranță superioară pe ten atopic</li>
+      </ul>
+      <p>Putem oferi pentru publicarea dvs.:</p>
+      <ul>
+        <li>Comunicat oficial și imagini HQ</li>
+        <li>Fișe tehnice de produs</li>
+        <li>Interviu cu Dr. Alexandra Dinu</li>
+        <li>Kituri de testare pentru redacție</li>
+      </ul>
+      <p>Așteptăm cu interes propunerile dvs. editoriale.</p>
+      <p>Cu considerație,<br>Andreea Ilie<br>PR Manager – NIVEA România</p>
+    </div>
+  </div>
+
+  <div id="modal-invite" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2>INVITAȚIE DE PRESĂ</h2>
+      <img src="images/11.jpg" alt="Invitație de presă" style="border-radius:8px; margin-bottom:1rem;">
+      <p>Evenimentul de lansare a gamei NIVEA PureGlow</p>
+      <p><i class="fa-solid fa-location-dot"></i> Casa Monteoru, Str. C.A. Rosetti 4, București</p>
+      <p><i class="fa-regular fa-calendar"></i> Marți, 25 iunie 2025 | <i class="fa-regular fa-clock"></i> Ora: 18:00</p>
+      <p><i class="fa-solid fa-user"></i> Dress code: Smart casual cu accent de albastru</p>
+      <ul>
+        <li>Beauty Bar interactiv – testare produse personalizată</li>
+        <li>Intervenții live cu dermatologi</li>
+        <li>Photo corners & Glow Mirror Booth</li>
+        <li>Networking & momente cozy în grădină</li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="gallery">
+    <div class="container gallery">
+      <img src="images/2.jpg" alt="PureGlow 2">
+      <img src="images/5.jpg" alt="PureGlow 5">
+      <img src="images/3.jpg" alt="PureGlow 3">
+      <img src="images/7.jpg" alt="PureGlow 7">
+      <img src="images/1.jpg" alt="PureGlow 1">
+      <img src="images/4.jpg" alt="PureGlow 4">
+      <img src="images/6.jpg" alt="PureGlow 6">
+      <img src="images/8.jpg" alt="PureGlow 8">
+      <img src="images/9.jpg" alt="PureGlow 9">
+      <img src="images/10.jpg" alt="PureGlow 10">
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="container testimonials">
+      <div class="testimonial-card">
+        <p class="testimonial-content">"PureGlow mi-a schimbat complet rutina de îngrijire! Pielea mea sensibilă nu a fost niciodată mai calmă."</p>
+        <p class="testimonial-author">- Ana Popescu, influencer beauty</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-content">"Formulele sunt extrem de delicate și eficiente. Recomand PureGlow oricui are pielea sensibilă."</p>
+        <p class="testimonial-author">- Ioana Ionescu, jurnalist PR</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-content">"Imi place conceptul și ambalajul. Un brand serios pentru nevoi reale de îngrijire."</p>
+        <p class="testimonial-author">- Elena Marin, editor lifestyle</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="container cta-content">
+      <h2>Fii la curent cu noutățile PureGlow</h2>
+      <p>Abonează-te la newsletter pentru sfaturi de îngrijire și lansări exclusive.</p>
+      <form class="newsletter">
+        <input type="email" placeholder="Adresa ta de email">
+        <button type="submit">Înscrie-te</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Portofoliu NIVEA PureGlow • Toate drepturile rezervate
+  </footer>
+
+  <script>
+    // Feature-card click to open modals
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const target = card.getAttribute('data-target');
+        document.getElementById('modal-' + target).style.display = 'flex';
+      });
+    });
+    // Close buttons
+    document.querySelectorAll('.modal-close').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.modal').style.display = 'none';
+      });
+    });
+    // Click outside content to close
+    window.addEventListener('click', e => {
+      if (e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
